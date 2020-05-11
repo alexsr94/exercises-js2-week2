@@ -15,6 +15,11 @@
  */
 function exerciseOne(arrayOfPeople) {
   let content = document.querySelector("#content");
+
+  arrayOfPeople.map(
+    (x) =>
+      (content.innerHTML += "<h1>" + x.name + "</h1><h2>" + x.job + "</h2>")
+  );
 }
 
 /**
@@ -25,7 +30,10 @@ function exerciseOne(arrayOfPeople) {
  *
  */
 function exerciseTwo(shopping) {
-  //Write your code in here
+  let htmlCode = "";
+  shopping.map((x) => (htmlCode += "<li>" + x + "</li>"));
+  htmlCode = "<ul>" + htmlCode + "</ul>";
+  document.querySelector("#content").innerHTML += htmlCode;
 }
 
 /**
@@ -58,7 +66,47 @@ function exerciseTwo(shopping) {
     The end result should look something like this: https://hyf-js2-week1-makeme-ex1-demo.herokuapp.com/
 **/
 function exerciseThree(books) {
-  //Write your code in here
+  let styleObject =
+    ".myFavoritesBooksItem {width: 350px;margin: 15px;padding: 10px;min - width: 350px; height: 350px; display:in-line;} #myFavoritesBooksList{list-style: none;display: flex;flex - wrap: wrap;padding: 20px;width: calc(100 % - 41px);}";
+  let style = document.createElement("style");
+  style.innerHTML = styleObject;
+  document.body.appendChild(style);
+
+  let ulElement = document.createElement("ul");
+  ulElement.id = "myFavoritesBooksList";
+  document.body.appendChild(ulElement);
+  for (i = 0; i < books.length; i++) {
+    if (books[i].alreadyRead) {
+      let listItem = document.createElement("li");
+      listItem.style.backgroundColor = "green";
+      listItem.className = "myFavoritesBooksItem";
+      let titleOfTheBook = document.createElement("p");
+      titleOfTheBook.innerText = books[i].title;
+      let imgOfTheBook = document.createElement("img");
+      imgOfTheBook.src =
+        "https://edit.org/images/cat/portadas-libros-big-2019101610.jpg";
+      imgOfTheBook.style.width = "40%";
+      listItem.appendChild(titleOfTheBook);
+      listItem.appendChild(imgOfTheBook);
+
+      document.getElementById("myFavoritesBooksList").appendChild(listItem);
+    }
+    else {
+      let listItem = document.createElement("li");
+      listItem.style.backgroundColor = "red";
+      listItem.className = "myFavoritesBooksItem";
+      let titleOfTheBook = document.createElement("p");
+      titleOfTheBook.innerText = books[i].title;
+      let imgOfTheBook = document.createElement("img");
+      imgOfTheBook.src =
+        "https://edit.org/images/cat/portadas-libros-big-2019101610.jpg";
+      imgOfTheBook.style.width = "40%";
+      listItem.appendChild(titleOfTheBook);
+      listItem.appendChild(imgOfTheBook);
+
+      document.getElementById("myFavoritesBooksList").appendChild(listItem);
+    }
+  }
 }
 
 //
@@ -74,7 +122,7 @@ function exerciseThree(books) {
 let people = [
   { name: "Chris", job: "Teacher" },
   { name: "Joanna", job: "Student" },
-  { name: "Boris", job: "Prime Minister" }
+  { name: "Boris", job: "Prime Minister" },
 ];
 
 exerciseOne(people);
@@ -87,18 +135,18 @@ const books = [
   {
     title: "The Design of Everyday Things",
     author: "Don Norman",
-    alreadyRead: false
+    alreadyRead: false,
   },
   {
     title: "The Most Human Human",
     author: "Brian Christian",
-    alreadyRead: true
+    alreadyRead: true,
   },
   {
     title: "The Pragmatic Programmer",
     author: "Andrew Hunt",
-    alreadyRead: true
-  }
+    alreadyRead: true,
+  },
 ];
 
 exerciseThree(books);
